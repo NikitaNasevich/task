@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: flight-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:32768/flight_db
+    password: postgres123
+    username: postgres123
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml

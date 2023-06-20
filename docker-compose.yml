@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  flight-database:
+    image: postgres:13.1-alpine
+    container_name: flight_db
+    ports:
+      - "32768:5432"
+    volumes:
+      - ~/app/postgresql:/data
+    environment:
+      - POSTGRES_USER=postgres123
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=flight_db
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres123 -d flight_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  flight-service:
+    container_name: flight-service
+    ports:
+      - "8080:8080"
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://flight-database:5432/flight_db
+      SPRING_DATASOURCE_USERNAME: postgres123
+      SPRING_DATASOURCE_PASSWORD: postgres123
+    depends_on:
+      - flight-database
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
