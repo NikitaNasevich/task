@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.digitalchief.task.entity.Trip;
 import ru.digitalchief.task.exeption.trip.TripValidationException;
 import ru.digitalchief.task.request.TripRequest;
 import ru.digitalchief.task.response.trip.ListTripsFullDataResponse;
@@ -28,7 +27,7 @@ public class TripController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Trip> create(@RequestBody @Valid TripRequest tripRequest,
+    public ResponseEntity<?> create(@RequestBody @Valid TripRequest tripRequest,
                                        BindingResult bindingResult) {
         validate(bindingResult);
         return ResponseEntity.status(HttpStatus.OK).body(tripService.save(tripRequest));
@@ -54,7 +53,7 @@ public class TripController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Trip> update(@PathVariable("id") long id,
+    public ResponseEntity<?> update(@PathVariable("id") long id,
                                        @Valid @RequestBody TripRequest tripRequest,
                                        BindingResult bindingResult) {
         validate(bindingResult);

@@ -49,7 +49,7 @@ public class FlightService {
     }
 
     @Transactional
-    public Flight create(@NotNull FlightRequest flightRequest) {
+    public FlightFullDataResponse create(@NotNull FlightRequest flightRequest) {
         log.info("FlightService-create");
 
         Trip trip = tripService.findTripById(flightRequest.getTripId());
@@ -63,7 +63,7 @@ public class FlightService {
         flightRepository.save(flightToSave);
         log.info("New flight was added, id: " + flightToSave.getFlightId());
 
-        return flightToSave;
+        return mapper.mapFlightToFlightFullDataResponse(flightToSave);
     }
 
     public FlightFullDataResponse findById(@NotNull Long id) {
@@ -161,7 +161,7 @@ public class FlightService {
     }
 
     @Transactional
-    public Flight update(@NotNull Long id,
+    public FlightFullDataResponse update(@NotNull Long id,
                          @NotNull FlightRequest flightRequest) {
         log.info("FlightService-update");
         findFlightById(id);
@@ -176,7 +176,7 @@ public class FlightService {
 
         flightRepository.save(updatedFlight);
         log.info("Flight with id: " + id + " was updated");
-        return updatedFlight;
+        return mapper.mapFlightToFlightFullDataResponse(updatedFlight);
     }
 
     @Transactional

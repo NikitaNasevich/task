@@ -1,17 +1,20 @@
 package ru.digitalchief.task.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Builder
+@ToString
 @AllArgsConstructor
 @Entity(name = "trips")
 public class Trip {
@@ -36,4 +39,8 @@ public class Trip {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "trip")
+    private List<Flight> flights;
 }

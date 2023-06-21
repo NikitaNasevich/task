@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.digitalchief.task.entity.Airplane;
 import ru.digitalchief.task.exeption.airplane.AirplaneValidationException;
 import ru.digitalchief.task.request.AirplaneRequest;
 import ru.digitalchief.task.response.airplane.AirplaneFullDataResponse;
@@ -27,7 +26,7 @@ public class AirplaneController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Airplane> create(@RequestBody @Valid AirplaneRequest airplaneRequest,
+    public ResponseEntity<?> create(@RequestBody @Valid AirplaneRequest airplaneRequest,
                                            BindingResult bindingResult) {
         validate(bindingResult);
         return ResponseEntity.status(HttpStatus.OK).body(airplaneService.create(airplaneRequest));
@@ -46,7 +45,7 @@ public class AirplaneController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Airplane> update(@PathVariable("id") long id,
+    public ResponseEntity<?> update(@PathVariable("id") long id,
                                          @Valid @RequestBody AirplaneRequest airplaneRequest,
                                          BindingResult bindingResult) {
         validate(bindingResult);

@@ -33,7 +33,7 @@ public class AirplaneService {
     }
 
     @Transactional
-    public Airplane create(@NotNull @Valid AirplaneRequest airplaneRequest) {
+    public AirplaneFullDataResponse create(@NotNull @Valid AirplaneRequest airplaneRequest) {
         log.info("AirplaneService-create");
 
         if (isAirplaneExist(airplaneRequest.getModel())) {
@@ -44,7 +44,7 @@ public class AirplaneService {
         airplaneRepository.save(airplaneToSave);
         log.info("New airplane was added, id: " + airplaneToSave.getAirplaneId());
 
-        return airplaneToSave;
+        return mapper.mapAirplaneToAirplaneFullDataResponse(airplaneToSave);
     }
 
     public AirplaneFullDataResponse findById(@NotNull Long id) {
@@ -70,7 +70,7 @@ public class AirplaneService {
     }
 
     @Transactional
-    public Airplane update(@NotNull Long id,
+    public AirplaneFullDataResponse update(@NotNull Long id,
                            @NotNull AirplaneRequest airplaneRequest) {
         log.info("AirplaneService-update");
         findAirplaneById(id);
@@ -80,7 +80,7 @@ public class AirplaneService {
         airplaneToUpdate.setAirplaneId(id);
         airplaneRepository.save(airplaneToUpdate);
         log.info("Airplane with id: " + id + " was updated");
-        return airplaneToUpdate;
+        return mapper.mapAirplaneToAirplaneFullDataResponse(airplaneToUpdate);
     }
 
     @Transactional

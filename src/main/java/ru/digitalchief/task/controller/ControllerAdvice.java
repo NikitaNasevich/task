@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.digitalchief.task.exeption.ErrorResponse;
 import ru.digitalchief.task.exeption.ParseException;
+import ru.digitalchief.task.exeption.airplane.AirplaneAlreadyExistException;
 import ru.digitalchief.task.exeption.airplane.AirplaneNotFoundException;
+import ru.digitalchief.task.exeption.airplane.AirplaneValidationException;
 import ru.digitalchief.task.exeption.flight.FlightAlreadyExistsException;
 import ru.digitalchief.task.exeption.flight.FlightNotFoundException;
 import ru.digitalchief.task.exeption.flight.FlightValidationException;
@@ -51,6 +53,22 @@ public class ControllerAdvice {
     public ErrorResponse handleAirplaneNotFoundException(AirplaneNotFoundException airplaneNotFoundException) {
         log.error(airplaneNotFoundException.getMessage());
         return new ErrorResponse(airplaneNotFoundException.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(AirplaneAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.ALREADY_REPORTED)
+    @ResponseBody
+    public ErrorResponse handleAAirplaneAlreadyExistException(AirplaneAlreadyExistException airplaneAlreadyExistException) {
+        log.error(airplaneAlreadyExistException.getMessage());
+        return new ErrorResponse(airplaneAlreadyExistException.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(AirplaneValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleAirplaneValidationException(AirplaneValidationException airplaneValidationException) {
+        log.error(airplaneValidationException.getMessage());
+        return new ErrorResponse(airplaneValidationException.getMessage(), LocalDateTime.now());
     }
 
     @ExceptionHandler(FlightValidationException.class)
