@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "abbc9eee-81df-4f92-81d8-7ffe426d3075",
+		"name": "flight service collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24150085",
+		"_collection_link": "https://interstellar-crater-494474.postman.co/workspace/Team-Workspace~20f3f218-87c2-40a9-830c-45fed934de7c/collection/24150085-abbc9eee-81df-4f92-81d8-7ffe426d3075?action=share&creator=24150085&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "create trip",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.globals.set(\"tripId\", jsonData.tripId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Access-Token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTAxIiwiZXhwIjoxNjg1NzA1MzI5LCJyb2xlIjoiUk9MRV9VU0VSIn0.1W-FYgfAv5GfEHRHhW9pSlewcx_55dqnOtm2mkx5pBl1c_Q6iwuLeO1TMOO7ACgsRB9TnaNE6b6FHD8Jnuq2iQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"departureCity\":\"Minsk\",\r\n    \"arrivalCity\":\"Gomel\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trips/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get trip with id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trips/find/{{tripId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"find",
+						"{{tripId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all trips",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/trips/find-all?page=0&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"find-all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all trips limited data",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/trips/find-all-limited-data?page=0&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"find-all-limited-data"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update trip",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"departureCity\":\"Minsk\",\r\n    \"arrivalCity\":\"Grodno\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trips/update/{{tripId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"update",
+						"{{tripId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete trip",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/trips/delete/{{tripId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"delete",
+						"{{tripId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create airplane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.globals.set(\"airplaneId\", jsonData.airplaneId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\":\"Boing 727\",\r\n    \"numberOfSeats\":\"101\",\r\n    \"socket\":\"true\",\r\n    \"media\":\"false\",\r\n    \"wiFi\":\"false\",\r\n    \"seatPitch\":\"30\",\r\n    \"seatWidth\":\"32\",\r\n    \"hasFirstClass\":\"true\",\r\n    \"chairScheme\":\"3-3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/airplanes/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplanes",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get airplane with id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/airplanes/find/{{airplaneId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplanes",
+						"find",
+						"{{airplaneId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all airplanes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/airplanes/find/all?page=0&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplanes",
+						"find",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update airplane",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\":\"Boing 727\",\r\n    \"numberOfSeats\":\"101\",\r\n    \"socket\":\"true\",\r\n    \"media\":\"false\",\r\n    \"wiFi\":\"false\",\r\n    \"seatPitch\":\"30\",\r\n    \"seatWidth\":\"32\",\r\n    \"hasFirstClass\":\"true\",\r\n    \"chairScheme\":\"3-3\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/airplanes/update/{{airplaneId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplanes",
+						"update",
+						"{{airplaneId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete airplane",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/airplanes/delete/{{airplaneId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplanes",
+						"delete",
+						"{{airplaneId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create flight",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"flightId\", jsonData.flightId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tripId\":\"1\",\r\n    \"airplaneId\":\"2\",\r\n    \"flightNumber\":\"BY-2521477\",\r\n    \"departureDateTime\":\"12-06-2023 21:30\",\r\n    \"arrivalDateTime\":\"12-06-2023 23:30\",\r\n    \"meal\": false,\r\n    \"handLuggage\": false,\r\n    \"luggage\": true,\r\n    \"canceled\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flights/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get flight with id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flights/find/{{flightId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"find",
+						"{{flightId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all flights",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flights/find/all?page=0&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"find",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find flight limited criteria and return",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"departureCity\":\"Minsk\",\r\n    \"arrivalCity\":\"New-York\",\r\n    \"departureDate\":\"12-06-2023\",\r\n    \"fastest\":\"false\",\r\n    \"returnDate\":\"13-06-2023\",\r\n    \"minSeatCount\":\"0\",\r\n    \"maxSeatCount\":\"0\",\r\n    \"firstClass\":\"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flights/find-limited-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"find-limited-data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get flight with id limited",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flights/find-limited-data/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"find-limited-data",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update flight",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tripId\":\"8\",\r\n    \"airplaneId\":\"1\",\r\n    \"flightNumber\":\"BY-2577\",\r\n    \"departureDateTime\":\"12-06-2023 21:30\",\r\n    \"arrivalDateTime\":\"12-06-2023 23:30\",\r\n    \"luggage\":\"true\",\r\n    \"canceled\":\"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flights/update/{{flightId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"update",
+						"{{flightId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete flight",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flights/delete/{{flightId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights",
+						"delete",
+						"{{flightId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
